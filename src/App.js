@@ -10,6 +10,7 @@ import {
 import InfoBox from "./COMPONENTS/InfoBox";
 import Map from "./COMPONENTS/Map";
 import Table from "./COMPONENTS/Table";
+import { sortData } from "./util";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -26,6 +27,9 @@ function App() {
             name: country.country,
             value: country.countryInfo.iso2,
           }));
+
+          const sortedData = sortData(data);
+          setTableData(sortedData);
           setCountries(countries);
         });
     };
@@ -43,7 +47,6 @@ function App() {
   const onCountryChange = async (event) => {
     const countryCode = event.target.value;
 
-    setTableData(data);
     setCountry(countryCode);
 
     const url =
@@ -97,8 +100,9 @@ function App() {
       </div>
       <Card className="app__right">
         <CardContent>
-          <Table countries={tableData} />
           <h3> Live Cases by Country</h3>
+          <Table countries={tableData} />
+
           {/**Graph */}
           <h3>Wordwide new cases</h3>
         </CardContent>
