@@ -9,11 +9,13 @@ import {
 } from "@material-ui/core";
 import InfoBox from "./COMPONENTS/InfoBox";
 import Map from "./COMPONENTS/Map";
+import Table from "./COMPONENTS/Table";
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
+  const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
     const getCountriesData = async () => {
@@ -41,6 +43,7 @@ function App() {
   const onCountryChange = async (event) => {
     const countryCode = event.target.value;
 
+    setTableData(data);
     setCountry(countryCode);
 
     const url =
@@ -94,8 +97,8 @@ function App() {
       </div>
       <Card className="app__right">
         <CardContent>
-          {/**Table*/}
-          <h3>Live Cases by Country</h3>
+          <Table countries={tableData} />
+          <h3> Live Cases by Country</h3>
           {/**Graph */}
           <h3>Wordwide new cases</h3>
         </CardContent>
