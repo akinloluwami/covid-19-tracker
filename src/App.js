@@ -30,7 +30,13 @@ function App() {
     getCountriesData();
   }, []);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetch("https://disease.sh/v3/covid-19/all").then((response) =>
+      response.json().then((data) => {
+        setCountryInfo(data);
+      })
+    );
+  }, []);
 
   const onCountryChange = async (event) => {
     const countryCode = event.target.value;
