@@ -2,6 +2,14 @@
   margin: 0;
   padding: 0;
 }
+.app {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+.app__left {
+  flex: 0.9;
+}
 .app__header {
   display: flex;
   justify-content: space-between;
@@ -10,4 +18,9 @@
 }
 .app__stats {
   display: flex;
+}
+@media (max-width: 990px) {
+  .app {
+    flex-direction: column;
+  }
 }
