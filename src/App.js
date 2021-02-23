@@ -4,6 +4,8 @@ import { FormControl, Select, MenuItem } from "@material-ui/core";
 
 function App() {
   const [countries, setCountries] = useState(["Nigeria", "Ghana", "Canada"]);
+
+  useEffect(() => {}, []);
   return (
     <div className="app">
       <div className="app__header">
