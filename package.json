@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.1.10",
     "chart.js": "^2.9.4",
     "leaflet": "^1.7.1",
+    "npm-gui": "^2.1.0",
     "numeral": "^2.0.6",
     "react": "^17.0.1",
     "react-chartjs-2": "^2.11.1",
@@ -40,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "aos": "2.3.4"
   }
 }
