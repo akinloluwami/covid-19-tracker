@@ -12,12 +12,14 @@ import Map from "./COMPONENTS/Map";
 import Table from "./COMPONENTS/Table";
 import { sortData } from "./util";
 import LineGraph from "./COMPONENTS/LineGraph";
+import "leaflet/dist/leaflet.css";
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
+  const [mapCenter, setMapCenter] = useState([]);
 
   useEffect(() => {
     const getCountriesData = async () => {
@@ -97,8 +99,10 @@ function App() {
             </Select>
           </FormControl>
         </div>
-        <Map />
+
+        <Map center={mapCenter} zoom={mapZoom} />
       </div>
+
       <Card className="app__right">
         <CardContent>
           <h3> Live Cases by Country</h3>
