@@ -1,5 +1,6 @@
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import "./Map.css";
+
 function Map({ center, zoom }) {
   return (
     <div className="map">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import numeral from "numeral";
 
@@ -15,7 +15,7 @@ const options = {
   tooltips: {
     mode: "index",
     intersect: false,
-    callback: {
+    callbacks: {
       label: function (tooltipItem, data) {
         return numeral(tooltipItem.value).format("+0,0");
       },
@@ -37,6 +37,7 @@ const options = {
           display: false,
         },
         ticks: {
+          // Include a dollar sign in the ticks
           callback: function (value, index, values) {
             return numeral(value).format("0a");
           },
@@ -45,11 +46,11 @@ const options = {
     ],
   },
 };
-const buildChartData = (data, casesType = "cases") => {
-  const chartData = [];
-  let lastDataPoint;
 
-  for (let date in data.cases) {
+const buildChartData = (data, casesType) => {
+  let chartData = [];
+  let lastDataPoint;
+  for (let date in data[casesType]) {
     if (lastDataPoint) {
       let newDataPoint = {
         x: date,
@@ -62,23 +63,21 @@ const buildChartData = (data, casesType = "cases") => {
   return chartData;
 };
 
-function LineGraph({ casesType = "cases" }) {
+function Graph({ casesType = "cases" }) {
   const [data, setData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
       await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
-        .then((response) => {
-          return response.json();
-        })
+        .then((response) => response.json())
         .then((data) => {
-          let chartData = buildChartData(data, "cases");
+          let chartData = buildChartData(data, casesType);
           setData(chartData);
-          console.log(chartData);
         });
     };
+
     fetchData();
-  }, []);
+  }, [casesType]);
 
   return (
     <div>
@@ -100,4 +99,4 @@ function LineGraph({ casesType = "cases" }) {
   );
 }
 
-export default LineGraph;
+export default Graph;

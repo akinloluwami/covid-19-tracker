@@ -19,9 +19,9 @@ function App() {
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
-  const [mapCenter, setMapCenter] = useState({
-    lat: 34.80746,
-    lng: -40.4796,
+  let [mapCenter, setMapCenter] = useState({
+    lat: 8.7832,
+    lng: 34.5085,
   });
   const [mapZoom, setMapZoom] = useState(3);
 
@@ -65,6 +65,57 @@ function App() {
       .then((data) => {
         setCountry(countryCode);
         setCountryInfo(data);
+        console.log(countryInfo);
+
+        {
+          /**The  mapZoom is also not working*/
+        }
+        setMapZoom(4);
+
+        const long = data.countryInfo.long;
+        const lat = data.countryInfo.lat;
+
+        console.log(long);
+        console.log(lat);
+        {
+          /**I WANT THE MapCenter to change to these values (the ones logged to the console) when the onCountryChange function is called (i.e when you change the country from the dropdown)*/
+        }
+
+        {
+          /**METHOD 1 - DID NOT WORK
+           *
+           * setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+           */
+        }
+
+        {
+          /**METHOD 2 - DID NOT WORK 
+           * 
+           *  setMapCenter({
+            long,
+            lat,
+          });
+          */
+        }
+
+        {
+          /**METHOD 3 - DID NOT WORK 
+           * 
+           * if (typeof data.countryInfo !== "undefined") {
+            const {
+              countryInfo: { lat, long },
+            } = data;
+            setMapCenter({ lat, lng: long });
+
+            setMapZoom(4);
+          } else {
+            setMapCenter({ lat: 8.7832, lng: 34.5085 });
+            setMapZoom(3);
+          }
+
+          I CANNOT COME AND KILL MYSELF
+          */
+        }
       });
   };
   return (
